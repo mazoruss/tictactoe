@@ -2,6 +2,7 @@ var util = require('util');
 
 var board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
 var player = 1;
+var counter = 0;
 
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
@@ -71,11 +72,16 @@ process.stdin.on('data', function (text) {
   var moved = toggleBoard(input[0], input[1]);
 
   if (moved) {
+  	counter++;
   	if (checkWinner()) {
 	  	printBoard(board);
   		console.log('WINNER: Player ' + player);
   		done();
   	} else {
+  		if (counter === 9) {
+  			console.log('DRAW');
+  			done();
+  		}
 	  	changePlayer();
 	  	console.log('Next Move Player ' + player);
 	  	printBoard(board);
