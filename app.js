@@ -1,5 +1,3 @@
-var util = require('util');
-
 var board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
 var player = 1;
 var counter = 0;
@@ -7,7 +5,7 @@ var counter = 0;
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 
-var printBoard = (board) => {
+var printBoard = () => {
 	console.log('    A   B   C  ');
 	console.log('  -------------');
 	for (var i = 0; i < 3; i++) {
@@ -74,17 +72,18 @@ process.stdin.on('data', function (text) {
   if (moved) {
   	counter++;
   	if (checkWinner()) {
-	  	printBoard(board);
+	  	printBoard();
   		console.log('WINNER: Player ' + player);
   		done();
   	} else {
   		if (counter === 9) {
+  			printBoard();
   			console.log('DRAW');
   			done();
   		}
 	  	changePlayer();
 	  	console.log('Next Move Player ' + player);
-	  	printBoard(board);
+	  	printBoard();
   	}
   } else {
   	console.log('Invalid Move');
